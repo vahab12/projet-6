@@ -1,13 +1,15 @@
 const express = require('express');
 const bodyParser = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const path = require('path');
 const cors = require('cors');
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
-//  Connexion au mongodb
+// Connexion au mongodb
+//process.env.SECRET_DB
 mongoose.connect('mongodb+srv://Projet6:1214@cluster0.5vtmr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -16,6 +18,7 @@ mongoose.connect('mongodb+srv://Projet6:1214@cluster0.5vtmr.mongodb.net/myFirstD
     .catch(() => console.log('Connexion échouée  à MongoDB!'));
 
 const app = express();
+app.use(helmet());
 
 //Middlware générale 
 app.use((req, res, next) => {
