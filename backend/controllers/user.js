@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+//const cryptojs = require('crypto-js')
 const User = require('../models/User');
 
 exports.signup = (req, res, next) => {
+    //const hashedEmail = cryptojs.HmacSHA512(req.body.email, process.env.SECRET_CRYPTOJS_TOKEN).toString(cryptojs.enc.Base64);
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
@@ -18,6 +19,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
+    ///const hashedEmail = cryptojs.HmacSHA512(req.body.email, process.env.SECRET_CRYPTOJS_TOKEN).toString(cryptojs.enc.Base64);
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {

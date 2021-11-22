@@ -50,13 +50,13 @@ exports.getAllSauce = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 }
 
-
+//LIKES, DESLIKE ET NEUTRE
 exports.likeSauce = (req, res, next) => {
     console.log(req.body)
     switch (req.body.like) {
-        //cancel = 0
-        //check if the user had liked or disliked the sauce
-        //uptade the sauce, send message/error
+        //Cancel = 0
+        //Vérifier si l'utilisateur a aimé ou n'a pas aimé la sauce 
+        //Mettre à jours la sauce et envoyer message/ error
         case 0:
             Sauce.findOne({ _id: req.params.id })
                 .then((sauce) => {
@@ -66,7 +66,7 @@ exports.likeSauce = (req, res, next) => {
                                 $pull: { usersLiked: req.body.userId },
                                 _id: req.params.id
                             })
-                            .then(() => { res.status(201).json({ message: 'Votre avis a été pris en compte!' }); })
+                            .then(() => { res.status(201).json({ message: 'Avis neure' }); })
                             .catch((error) => { res.status(400).json({ error: error }); });
 
                     }
@@ -76,14 +76,14 @@ exports.likeSauce = (req, res, next) => {
                                 $pull: { usersDisliked: req.body.userId },
                                 _id: req.params.id
                             })
-                            .then(() => { res.status(201).json({ message: 'ok...' }); })
+                            .then(() => { res.status(201).json({ message: 'Avis neure' }); })
                             .catch((error) => { res.status(400).json({ error: error }); });
                     }
                 })
                 .catch((error) => { res.status(404).json({ error: error }); });
             break;
             //likes = 1
-            //uptade the sauce, send message/error
+            //Mettre à jours la sauce et envoyer message/ error
         case 1:
             Sauce.updateOne({ _id: req.params.id }, {
                     $inc: { likes: 1 },
@@ -94,7 +94,7 @@ exports.likeSauce = (req, res, next) => {
                 .catch((error) => { res.status(400).json({ error: error }); });
             break;
             //likes = -1
-            //uptade the sauce, send message/error
+            //Mettre à jours la sauce et envoyer message/ error
         case -1:
             Sauce.updateOne({ _id: req.params.id }, {
                     $inc: { dislikes: 1 },
