@@ -4,13 +4,14 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const path = require('path');
 const cors = require('cors');
+//Dotenv 
+require('dotenv').config();
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 // Connexion au mongodb
-//process.env.SECRET_DB
-mongoose.connect('mongodb+srv://Projet6:1214@cluster0.5vtmr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MDB_SECRET, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

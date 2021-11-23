@@ -2,12 +2,15 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+//Dotenv 
+require('dotenv').config();
+
 //Importation de cryptojs pour chiffrer le mail
 const cryptojs = require('crypto-js');
 
 exports.signup = (req, res, next) => {
     //chiffrer l'émail avant de l'envoyer dans le bas de donnes
-    const hashEmail = cryptojs.HmacSHA256(req.body.email, "CRYPTOJS_TOKEN").toString();
+    const hashEmail = cryptojs.HmacSHA256(req.body.email, process.env.MAIL_SECRET).toString();
 
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -24,7 +27,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     //chiffrer l'émail avant de l'envoyer dans le bas de donnes
-    const hashEmail = cryptojs.HmacSHA256(req.body.email, "CRYPTOJS_TOKEN").toString();
+    const hashEmail = cryptojs.HmacSHA256(req.body.email, process.env.MAIL_SECRET).toString();
 
     User.findOne({ email: hashEmail })
         .then(user => {
@@ -38,7 +41,7 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         userId: user._id,
-                        token: jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' })
+                        token: jwt.sign({ userId: user._id }, process.env.MDP_SECRET, { expiresIn: '24h' })
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
