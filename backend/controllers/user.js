@@ -1,13 +1,19 @@
+//Importation de fichier User de dossier models
 const User = require('../models/User');
+
+//Importation de la paquage bcrypte (crypter le mdp)
 const bcrypt = require('bcrypt');
+
+//Importation de la paquage jsonwebtoken (??)
 const jwt = require('jsonwebtoken');
 
-//Dotenv 
+//Importation de la paquage Dotenv et config (mettre les clés secrets le ficher .env)
 require('dotenv').config();
 
-//Importation de cryptojs pour chiffrer le mail
+//Importation de cryptojs (pour chiffrer le mail)
 const cryptojs = require('crypto-js');
 
+//la fonction signup (création de nouveau utilisateur dans la base de donné)
 exports.signup = (req, res, next) => {
     //chiffrer l'émail avant de l'envoyer dans le bas de donnes
     const hashEmail = cryptojs.HmacSHA256(req.body.email, process.env.MAIL_SECRET).toString();
@@ -25,8 +31,10 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+//la fonction login (identification d'un utilisateur existant dans la base de donné)
 exports.login = (req, res, next) => {
     //chiffrer l'émail avant de l'envoyer dans le bas de donnes
+
     const hashEmail = cryptojs.HmacSHA256(req.body.email, process.env.MAIL_SECRET).toString();
 
     User.findOne({ email: hashEmail })

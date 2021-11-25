@@ -1,5 +1,7 @@
+//Importation de la paquage de mongoose (connexion mongoDB)
 const mongoose = require('mongoose');
 
+//le schema pour la sauce 
 const sauceSchema = mongoose.Schema({
     userId: { type: String, required: true },
     name: { type: String, required: true },
@@ -8,10 +10,11 @@ const sauceSchema = mongoose.Schema({
     mainPepper: { type: String, required: true },
     imageUrl: { type: String, required: true },
     heat: { type: Number, required: true },
-    likes: { type: Number, required: false, default: 0 },
-    dislikes: { type: Number, required: false, default: 0 },
-    usersLiked: { type: [String], required: false },
-    usersDisliked: { type: [String], required: false }
+    likes: { type: Number, required: true, default: 0 },
+    dislikes: { type: Number, required: true, default: 0 },
+    usersLiked: { type: [String], required: true },
+    usersDisliked: { type: [String], required: true }
 })
 
+//Exportation de ce module 
 module.exports = mongoose.model("Sauce", sauceSchema);

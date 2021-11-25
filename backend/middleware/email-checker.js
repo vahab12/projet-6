@@ -1,3 +1,4 @@
+//Regex (rensigner la bonne format d'émail)
 module.exports = (req, res, next) => {
     const validEmail = (email) => {
         let emailRegexp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/

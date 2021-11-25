@@ -1,12 +1,22 @@
+//Importation de la paquage express (???)
 const express = require('express');
+
+//Importation de la paquage express (???)
 const bodyParser = require('express');
+
+//Importation de la paquage de mongoose (connexion mongoDB)
 const mongoose = require('mongoose');
+
+//Importation de la paquage de helmet (améliorer la sécurité de l'app)
 const helmet = require('helmet');
+
+//Importation de la paquage de path (??)
 const path = require('path');
-const cors = require('cors');
+
 //Dotenv 
 require('dotenv').config();
 
+//Importer les fichier sauce et user de dossier routes
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
@@ -18,10 +28,11 @@ mongoose.connect(process.env.MDB_SECRET, {
     .then(() => console.log('Connexion réussie à MongoDB !'))
     .catch(() => console.log('Connexion échouée  à MongoDB!'));
 
+
 const app = express();
 app.use(helmet());
 
-//Middlware générale 
+//Middlware générale pour le cors  
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -29,7 +40,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(cors());
+
 
 app.use(bodyParser.json());
 
