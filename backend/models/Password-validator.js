@@ -1,7 +1,7 @@
 //Importation de la paquage password-validator
 const passwordValidator = require('password-validator');
 
-//le schema de new MDP
+//le chemin de new MDP
 const passwordSchema = new passwordValidator();
 
 //Le MDP doit respecter ce regle

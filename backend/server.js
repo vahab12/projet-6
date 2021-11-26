@@ -1,6 +1,8 @@
 const http = require('http');
 const app = require('./app');
 
+require('dotenv').config();
+
 // Pour résoudre une erreur inconnue lors de la création d'un user depuis le front.
 const cors = require('cors');
 app.use(cors())
@@ -16,7 +18,7 @@ const normalizePort = val => {
     }
     return false;
 };
-const port = normalizePort(process.env.PORT ||  '3000');
+const port = normalizePort(process.env.PORT);
 app.set('port', port);
 
 const errorHandler = error => {

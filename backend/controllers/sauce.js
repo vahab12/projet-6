@@ -1,7 +1,7 @@
 //Importation de fichier Sauce dans le dossier models
 const Sauce = require('../models/Sauce');
 
-//??
+//pour téléchager les images dans base de donée/supprimé 
 const fs = require('fs');
 
 // créer un sauce

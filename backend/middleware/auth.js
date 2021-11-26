@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 //Importation de la paquage dotenv et config (mettre les clés secrets dans le ficher .env)
 require('dotenv').config();
 
-//???????????????????????
+//responsable d'authantification (mail correct +mdp)
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];

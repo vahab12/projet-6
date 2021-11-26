@@ -4,10 +4,10 @@ const User = require('../models/User');
 //Importation de la paquage bcrypte (crypter le mdp)
 const bcrypt = require('bcrypt');
 
-//Importation de la paquage jsonwebtoken (??)
+//Importation de la paquage jsonwebtoken (sécurise l'envoie de token + chiffrer des tokens)
 const jwt = require('jsonwebtoken');
 
-//Importation de la paquage Dotenv et config (mettre les clés secrets le ficher .env)
+//Importation de la paquage Dotenv et configurer (mettre les clés secrets le ficher .env)
 require('dotenv').config();
 
 //Importation de cryptojs (pour chiffrer le mail)

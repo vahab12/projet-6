@@ -1,7 +1,7 @@
 //Importation de la paquage expresse
 const express = require('express');
 
-//????????????????????
+//gener les route 
 const router = express.Router();
 
 //Importation de fichier user de dossier controllers
